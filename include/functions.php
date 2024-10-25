@@ -99,20 +99,17 @@ function send_email($to, $data, $email_template, $subject, $attachments = array(
 
 function GetLoginUserName()
 {
-    return ($_SESSION['dailymilk']['user_id']) ? "{$_SESSION['dailymilk']['firstname']} {$_SESSION['dailymilk']['lastname']}" : null;
+    return ($_SESSION['krishisetu']['auth_id']) ? "{$_SESSION['krishisetu']['name']}" : null;
 }
 function GetLoginUserId()
 {
-    return ($_SESSION['dailymilk']['user_id']) ? $_SESSION['dailymilk']['user_id'] : null;
+    return ($_SESSION['krishisetu']['auth_id']) ? $_SESSION['krishisetu']['auth_id'] : null;
 }
 function GetLoginUserRole()
 {
-    return ($_SESSION['dailymilk']['roleid']) ? $_SESSION['dailymilk']['roleid'] : null;
+    return ($_SESSION['krishisetu']['role']) ? $_SESSION['krishisetu']['role'] : null;
 }
-function GetLoginAgencyId()
-{
-    return ($_SESSION['dailymilk']['agency_id']) ? $_SESSION['dailymilk']['agency_id'] : null;
-}
+
 
 // Password validation function
 function validatePassword($password)

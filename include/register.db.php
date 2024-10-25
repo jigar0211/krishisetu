@@ -12,22 +12,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
     $language = $_POST['language'] ?? '';
     $location = $_POST['location'] ?? '';
 
-    $profile_picture = ''; 
-    $file_name = null; 
+    $profile_picture = '';
+    $file_name = null;
 
-    // Handle file upload directly without validation
-    if (isset($_FILES['profile_picture'])) {
+    if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] == UPLOAD_ERR_OK) {
         $target_dir = "../uploads/profiles/";
-        $file_name = uniqid() . '-' . basename($_FILES["profile_picture"]["name"]);  
+        $file_name = uniqid() . '-' . basename($_FILES["profile_picture"]["name"]);
         $profile_picture = $target_dir . $file_name;
 
-        move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $profile_picture); // Upload the file directly
+        if (!move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $profile_picture)) {
+            $file_name = 'default-profile.png';
+        }
     } else {
-        // Set a default image if no file was uploaded
-        $file_name = 'default-profile.png'; // Ensure this file exists in your uploads folder
+        $file_name = 'default-profile.png';
     }
 
-    // Check if email already exists
     $conditions = [['where' => ['email' => $email], 'groupCondition' => 'AND']];
     $get_user = $db->get('authentication', '*', $conditions);
     if (!empty($get_user)) {
@@ -35,7 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
         die;
     }
 
-    // Check if contact number already exists
     $conditions = [['where' => ['contact_number' => $contact_number], 'groupCondition' => 'AND']];
     $get_user = $db->get('authentication', '*', $conditions);
     if (!empty($get_user)) {
@@ -43,37 +41,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
         die;
     }
 
-    // Hash the password
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    // Prepare data for insertion
     $values = [
         'auth_id' => uniqid(),
         'name' => $name,
         'email' => $email,
         'contact_number' => $contact_number,
         'password' => $hashed_password,
-        'role' => "2", // Hardcoded role value
+        'role' => "2",
         'profession' => $profession,
         'location' => $location,
         'language' => $language,
-        'profile_picture' => $file_name, // File name or default image
+        'profile_picture' => $file_name,
         'created_at' => date('Y-m-d H:i:s')
     ];
 
-    // Insert data into the `authentication` table
     $insert_id = $db->Insert('authentication', $values);
 
-    if ($insert_id) {
-        $_SESSION['krishisetu']['user_id'] = $values['auth_id']; // Save auth_id as user_id
+    if (empty($insert_id)) {
+        $_SESSION['krishisetu']['user_id'] = $values['auth_id'];
         $_SESSION['krishisetu']['name'] = $name;
         $_SESSION['krishisetu']['email'] = $email;
-        $_SESSION['krishisetu']['password'] = $password;
 
-        // Success message
-        echo json_encode(['status' => 'ok', 'message' => 'User registered successfully!', 'title' => 'Success', 'icon' => 'success', 'redirect_link' => 'dashboard.php']);
+        echo json_encode(['status' => 'ok', 'message' => 'User registered successfully!', 'title' =>'Success', 'page' => 'redirect', 'redirect_link' => 'dashboard.php']);
     } else {
-        // Failure message, ensuring response for failed insertion
-        echo json_encode(['status' => 'error', 'message' => 'Data insertion failed! Possible issue with database operation.', 'title' => 'Error', 'icon' => 'error', 'redirect_link' => 'dashboard.php']);
+        // Failure message
+        echo json_encode(['status' => 'error', 'message' => 'Data insertion failed! Possible issue with database operation.', 'title' => 'Error', 'icon' => 'error']);
     }
 }
