@@ -324,7 +324,7 @@ class Database
 
     public function fetch($tablename, $id)
     {
-        $sql = "SELECT * FROM {$tablename} WHERE id=:id";
+        $sql = "SELECT * FROM {$tablename} WHERE auth_id =:id";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();

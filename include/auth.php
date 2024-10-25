@@ -10,7 +10,7 @@ $login_user_role_id = GetLoginUserRole();
 $login_user_id = GetLoginUserId();
 
 // Fetch the logged-in user's data
-$logged_user = $db->fetch('users', $login_user_id);
+$logged_user = $db->fetch('authentication', $login_user_id);
 $language = $logged_user->lang;
 
 // Include the appropriate language file

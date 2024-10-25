@@ -48,32 +48,7 @@
   </head>
 
   <body>
-  <div id="loading" style="position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);width: 100%;height: 100%;background: rgba(215, 215, 215, 0.5); z-index: 9999;">
-    <div class="card-body text-center" style="top: 50%;position: relative;transform: translateY(-50%);">
-      <div class="spinner-grow spinner-grow-sm text-primary" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-      <div class="spinner-grow text-secondary" role="status" style="width: 20px; height: 20px;">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-      <div class="spinner-grow text-success" role="status" style="width: 25px; height: 25px;">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-      <div class="spinner-grow text-danger" role="status" style="width: 30px; height: 30px;">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-      <div class="spinner-grow text-warning" role="status" style="width: 35px; height: 35px;">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-      <div class="spinner-grow text-info" role="status" style="width: 40px; height: 40px;">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-      <div class="spinner-grow text-dark" role="status" style="width: 45px; height: 45px;">
-        <span class="visually-hidden">Loading...</span>
-      </div>
 
-    </div>
-  </div>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
