@@ -56,7 +56,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
         'profile_picture' => $file_name,
         'created_at' => date('Y-m-d H:i:s')
     ];
-
     $insert_id = $db->Insert('authentication', $values);
 
     if (empty($insert_id)) {

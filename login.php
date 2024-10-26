@@ -116,14 +116,15 @@
                         <!-- /Logo -->
                         <h4 class="mb-2">Welcome to krishisetu! 🙏</h4>
 
-                        <form id="formAuthentication" class="mb-3" action="index.html">
+                        <form id="formAuthentication" class="mb-3 needs-validation" method="post" action="include/login.db.php" >
+                            <input type="hidden" name="action" value="login_user">
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email or Username</label>
                                 <input
                                     type="text"
                                     class="form-control"
                                     id="email"
-                                    name="email-username"
+                                    name="emailusername"
                                     placeholder="Enter your email or username"
                                     autofocus />
                             </div>
@@ -159,7 +160,7 @@
                                     <span class="">
                                         <img src="assets/img/Google/Google.png" alt="Google image" height="22" style="margin-right: 8px">
                                     </span>
-                                    Continue with google
+                                    Continue with Google
                                 </button>
                             </div>
                             <div class="mb-3 mt-3">
@@ -189,6 +190,7 @@
     <script src="assets/vendor/js/bootstrap.js"></script>
     <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="assets/vendor/js/menu.js"></script>
+    <script src="assets/js/sweetalert2.all.min.js"></script>
 
     <!-- endbuild -->
 

@@ -115,7 +115,7 @@
                         </div>
                         <h4 class="mb-2">Adventure starts here 🙏</h4>
 
-                        <form id="formAuthentication" class="mb-3 needs-validation" novalidate method="post" id="login_form" action="include/register.db.php" enctype="multipart/form-data">
+                        <form id="formAuthentication" class="mb-3 needs-validation" method="post" action="include/register.db.php" enctype="multipart/form-data">
                             <input type="hidden" name="action" value="register_user">
                             <div class="modal-body">
                                 <div class="row g-2">
